@@ -13,6 +13,10 @@ export interface IContentsListResponse extends DefaultResponse {
   value: IContents[];
 }
 
+export interface IContentsDetailInfoResponse extends DefaultResponse {
+  value: IContents;
+}
+
 /*******************       DTO       *********************/
 export interface IContents {
   title: string;
