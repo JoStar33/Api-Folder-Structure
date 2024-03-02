@@ -1,4 +1,5 @@
-import axios, { AxiosRequestConfig } from "axios";
+import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
+import { DefaultResponse } from "@/types";
 
 const VERSION = "/v1";
 const URL_API = "/api";
@@ -13,5 +14,17 @@ const internalConfig: AxiosRequestConfig = {
   headers: { "Content-Type": "application/json" },
 };
 
+const responseBody = <T = DefaultResponse>(response: AxiosResponse<T>) => response.data;
+
 export const instance = axios.create(config);
 export const internalInstance = axios.create(internalConfig);
+
+export const requests = {
+  get: <T extends DefaultResponse = DefaultResponse>(url: string) => instance.get<T>(url).then(responseBody),
+  post: <T extends DefaultResponse = DefaultResponse>(url: string, body: object | FormData) => instance.post<T>(url, body).then(responseBody),
+  put: <T extends DefaultResponse = DefaultResponse>(url: string, body: object | FormData) => instance.put<T>(url, body).then(responseBody),
+  delete: <T extends DefaultResponse = DefaultResponse>(url: string) => instance.delete<T>(url).then(responseBody),
+  patch: <T extends DefaultResponse = DefaultResponse>(url: string, body: object | FormData | undefined) => instance.patch<T>(url, body).then(responseBody),
+  download: <T = Blob>(url: string, body: object | FormData) => instance.post<T>(url, body, { responseType: 'blob' }),
+  getDownload: <T = Blob>(url: string) => instance.get<T>(url, { responseType: 'blob' }),
+};

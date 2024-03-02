@@ -1,22 +1,20 @@
-import { ITag } from "@/types//tags";
 import { DefaultResponse } from ".";
 
 /*******************  HTTP REQUESTS  *********************/
-export interface IContentsListRequest {
+export interface IProductListRequest {
   size: number;
   page: number;
 }
-
-export interface IContentsCreateRequest extends IContents {}
+export interface IProductCreateRequest extends IProduct {}
 /*******************  HTTP RESPONSE  *********************/
-export interface IContentsListResponse extends DefaultResponse {
-  value: IContents[];
+export interface IProductListResponse extends DefaultResponse {
+  value: IProduct[];
 }
 
 /*******************       DTO       *********************/
-export interface IContents {
+export interface IProduct {
   title: string;
+  code: string;
   content: string;
-  author: string;
-  tag: ITag[];
+  brand: string;
 }
