@@ -1,10 +1,11 @@
-import { IProductCreateRequest, IProductListResponse } from "@/types/product";
+import { IProductCreateRequest, IProductDetailInfoResponse, IProductListResponse } from "@/types/product";
 import { requests } from "."
 
-const PRODUCT_URL = (url?: string) => `/product${url}`;
+const PRODUCT_URL = (url?: string | number) => `/product${url}`;
 
 export const ProductGet = {
-  getProductList: () => requests.get<IProductListResponse>(PRODUCT_URL())
+  getProductList: () => requests.get<IProductListResponse>(PRODUCT_URL()),
+  getProductDetailInfo: (productId: number) => requests.get<IProductDetailInfoResponse>(PRODUCT_URL(productId))
 }
 
 export const ProductPost = {

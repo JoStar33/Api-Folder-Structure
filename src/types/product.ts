@@ -11,6 +11,10 @@ export interface IProductListResponse extends DefaultResponse {
   value: IProduct[];
 }
 
+export interface IProductDetailInfoResponse extends DefaultResponse {
+  value: IProduct;
+}
+
 /*******************       DTO       *********************/
 export interface IProduct {
   title: string;
